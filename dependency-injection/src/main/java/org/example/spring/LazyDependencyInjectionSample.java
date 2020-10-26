@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Lazy;
  * @author zhengshijun
  * @version created on 2020/10/23.
  */
-@Configuration
+
 public class LazyDependencyInjectionSample {
 
 

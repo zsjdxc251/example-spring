@@ -62,7 +62,7 @@ import java.util.Set;
  * @author zhengshijun
  * @version created on 2020/10/24.
  */
-@Configuration
+
 public class DependencyInjectionResolutionSample {
 
 	@Autowired
