@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 
 /**
+ *
+ *    85 | 自定义Bean作用域：设计Bean作用域应该注意哪些原则？
+ *
  * @author zhengshijun
  * @version created on 2020/10/31.
  */
