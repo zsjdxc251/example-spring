@@ -1,10 +1,13 @@
 package org.example.spring;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 /**
  * @author zhengshijun
  * @version created on 2020/10/28.
  */
-public class SampleEntity {
+public class SampleEntity implements InitializingBean, DisposableBean {
 
 	private Long id;
 
@@ -20,5 +23,17 @@ public class SampleEntity {
 		return "SampleEntity{" +
 				"id=" + id +
 				'}';
+	}
+
+
+	@Override
+	public void destroy() throws Exception {
+
+		System.out.println("id:"+id+"-->>销毁");
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("id:"+id+"-->>初始化");
 	}
 }
