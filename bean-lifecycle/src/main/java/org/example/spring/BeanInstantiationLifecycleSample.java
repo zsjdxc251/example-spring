@@ -4,6 +4,7 @@ import org.example.spring.api.SampleEntity;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
+import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.Aware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -92,6 +93,16 @@ public class BeanInstantiationLifecycleSample {
 		public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 			// 替换类
 			return new SampleEntity();
+		}
+
+		@Override
+		public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+			return false;
+		}
+
+		@Override
+		public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
+			return null;
 		}
 	}
 }
