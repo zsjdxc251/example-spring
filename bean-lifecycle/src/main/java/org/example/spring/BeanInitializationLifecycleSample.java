@@ -76,7 +76,7 @@ public class BeanInitializationLifecycleSample {
 	}
 
 
-	static class  InitSampleEntity implements InitializingBean,SmartInitializingSingleton {
+	private static class  InitSampleEntity implements InitializingBean,SmartInitializingSingleton {
 		private String name;
 
 		@Override
