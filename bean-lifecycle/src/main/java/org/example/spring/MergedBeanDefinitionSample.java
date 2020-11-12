@@ -1,6 +1,7 @@
 package org.example.spring;
 
 import org.example.spring.api.SampleEntity;
+import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.beans.factory.support.AbstractBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -18,6 +19,7 @@ import org.springframework.core.io.ClassPathResource;
  *       {@link RootBeanDefinition}
  *       {@link GenericBeanDefinition}
  *       {@link ChildBeanDefinition}
+ *       {@link AnnotatedBeanDefinition}
  *
  *    92 | Spring Bean Class加载阶段：Bean ClassLoader能够被替换吗?
  *
@@ -43,7 +45,10 @@ public class MergedBeanDefinitionSample {
 
 		System.out.println(beanFactory.getBeanDefinitionCount());
 
-		beanFactory.getBean(SampleEntity.class);
-		//beanFactory.getMergedBeanDefinition("");
+		// beanFactory.getBean(SampleEntity.class);
+		//
+		System.out.println(beanFactory.getBean("sampleEntity",SampleEntity.class));;
+
+		System.out.println(beanFactory.getBean("superEntity",SampleEntity.class));;
 	}
 }

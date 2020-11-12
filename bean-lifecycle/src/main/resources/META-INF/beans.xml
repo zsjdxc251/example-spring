@@ -10,6 +10,12 @@
 
 
 
-	<bean class="org.example.spring.api.SampleEntity"/>
+	<bean name="sampleEntity" class="org.example.spring.api.SampleEntity" parent="superEntity" primary="true">
+		<property name="id" value="1"/>
+	</bean>
+
+	<bean name="superEntity" class="org.example.spring.api.SampleEntity">
+		<property name="name" value="zsj"/>
+	</bean>
 
 </beans>
