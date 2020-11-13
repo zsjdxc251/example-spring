@@ -15,13 +15,11 @@ public class ApplicationTest {
 	public static void main(String[] args) {
 
 		AbstractApplicationContext applicationContext1 = new AnnotationConfigApplicationContext(SampleEntity.class);
-
-
-
-
 		AbstractApplicationContext applicationContext2 = new AnnotationConfigApplicationContext(ContextEntity.class);
-
 		applicationContext1.setParent(applicationContext2);
+
+		applicationContext1.start();
+		applicationContext2.start();
 
 		System.out.println(String.join(",\n",applicationContext1.getBeanDefinitionNames()));
 		System.out.println("\t");
