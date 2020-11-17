@@ -1,8 +1,10 @@
 package org.example.spring;
 
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandler;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 
 /**
  *
@@ -20,5 +22,8 @@ public class ExtensibleXmlAuthoringSample {
 
 	public static void main(String[] args) {
 
+		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+		XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
+		beanDefinitionReader.loadBeanDefinitions("META-INF/users.xml");
 	}
 }

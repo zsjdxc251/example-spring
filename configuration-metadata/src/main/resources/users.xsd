@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="https://github.com/zsjdxc251/schema/users"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="https://github.com/zsjdxc251/schema/users">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+
+    <xsd:complexType name="UserEntity">
+        <xsd:attribute name="id" type="xsd:long" use="required"/>
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="city" type="City" use="required"/>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="City">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SHENZHEN"/>
+            <xsd:enumeration value="BEIJING"/>
+            <xsd:enumeration value="HANGZHOU"/>
+            <xsd:enumeration value="SHANGHAI"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="user" type="UserEntity"/>
+</xsd:schema>
