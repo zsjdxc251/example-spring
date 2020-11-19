@@ -14,4 +14,12 @@
 	<name>configuration-metadata</name>
 
 	<description>第十章：Spring配置元信息（Configuration Metadata）</description>
+
+	<dependencies>
+		<dependency>
+			<artifactId>api</artifactId>
+			<groupId>org.example</groupId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 </project>

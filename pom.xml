@@ -80,11 +80,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<artifactId>api</artifactId>
-			<groupId>org.example</groupId>
-			<version>${project.version}</version>
-		</dependency>
+
 	</dependencies>
 
 
