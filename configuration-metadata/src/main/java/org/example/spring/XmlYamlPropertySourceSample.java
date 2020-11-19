@@ -4,7 +4,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 
 /**
- *
+ *   121 | 基于YAML资源装载外部化配置
  *
  * @author zhengshijun
  * @version created on 2020/11/19.

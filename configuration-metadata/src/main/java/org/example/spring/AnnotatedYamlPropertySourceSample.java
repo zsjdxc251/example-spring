@@ -10,6 +10,10 @@ import org.springframework.context.support.AbstractApplicationContext;
 import javax.annotation.PostConstruct;
 
 /**
+ *
+ *    121 | 基于YAML资源装载外部化配置
+ *
+ *    
  * @author zhengshijun
  * @version created on 2020/11/19.
  */
