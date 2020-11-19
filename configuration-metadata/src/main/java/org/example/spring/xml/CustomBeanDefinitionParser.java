@@ -19,6 +19,7 @@ public class CustomBeanDefinitionParser extends AbstractSingleBeanDefinitionPars
 
 	@Override
 	protected void doParse(Element element, BeanDefinitionBuilder builder) {
+
 		setPropertyValue("id", element, builder);
 		setPropertyValue("name", element, builder);
 		setPropertyValue("city", element, builder);

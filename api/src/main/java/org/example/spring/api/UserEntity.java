@@ -56,4 +56,13 @@ public class UserEntity {
 		 */
 		SHANGHAI;
 	}
+
+	@Override
+	public String toString() {
+		return "UserEntity{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", city=" + city +
+				'}';
+	}
 }

@@ -1,5 +1,6 @@
 package org.example.spring;
 
+import org.example.spring.api.UserEntity;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
@@ -15,38 +16,39 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.AbstractRefreshableApplicationContext;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 
+import java.util.Map;
 import java.util.StringJoiner;
 
 /**
+ * 118 | 基于Extensible XML authoring 扩展Spring XML元素
+ * <p>
+ * Xml 扩展
+ * * 编写 Xml Schema 文件 ： 定义Xml结构
+ * * 自定义 {@link NamespaceHandler} 实现 ： 命名空间绑定
+ * * 自定义 {@link BeanDefinitionParser} 实现 Xml 元素与 {@link BeanDefinition} 解析
+ * <p>
+ * <p>
+ * <p>
+ * 119 | Extensible XML authoring扩展原理
+ * {@link AbstractApplicationContext#obtainFreshBeanFactory()}
+ * -- {@link AbstractRefreshableApplicationContext#refreshBeanFactory()}
+ * -- -- {@link AbstractXmlApplicationContext#loadBeanDefinitions(org.springframework.beans.factory.support.DefaultListableBeanFactory)}
+ * -- -- -- {@link XmlBeanDefinitionReader#doLoadBeanDefinitions(org.xml.sax.InputSource, org.springframework.core.io.Resource)}
+ * -- -- -- -- {@link XmlBeanDefinitionReader#registerBeanDefinitions(org.w3c.dom.Document, org.springframework.core.io.Resource)}
+ * -- -- -- -- -- {@link DefaultBeanDefinitionDocumentReader#doRegisterBeanDefinitions(org.w3c.dom.Element)}
+ * -- -- -- -- -- -- {@link DefaultBeanDefinitionDocumentReader#parseBeanDefinitions(org.w3c.dom.Element, org.springframework.beans.factory.xml.BeanDefinitionParserDelegate)}
+ * -- -- -- -- -- -- -- {@link BeanDefinitionParserDelegate#parseCustomElement(org.w3c.dom.Element, org.springframework.beans.factory.config.BeanDefinition)}
+ * -- -- -- -- -- -- -- -- {@link BeanDefinitionParserDelegate#getNamespaceURI(org.w3c.dom.Node)} // 命名空间url
+ * -- -- -- -- -- -- -- -- {@link NamespaceHandlerResolver#resolve(java.lang.String)}
+ * -- -- -- -- -- -- -- -- -- {@link NamespaceHandler#init()}
+ * -- -- -- -- -- -- -- -- {@link NamespaceHandlerSupport#parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)}
+ * -- -- -- -- -- -- -- -- -- {@link AbstractBeanDefinitionParser#parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)}
+ * -- -- -- -- -- -- -- -- -- -- {@link AbstractSingleBeanDefinitionParser#parseInternal(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)}
+ * -- -- -- -- -- -- -- -- -- -- -- {@link AbstractSingleBeanDefinitionParser#doParse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext, org.springframework.beans.factory.support.BeanDefinitionBuilder)}
+ * <p>
+ * <p>
+ * {@link StringJoiner}
  *
- *    118 | 基于Extensible XML authoring 扩展Spring XML元素
- *
- *       Xml 扩展
- *         * 编写 Xml Schema 文件 ： 定义Xml结构
- *         * 自定义 {@link NamespaceHandler} 实现 ： 命名空间绑定
- *         * 自定义 {@link BeanDefinitionParser} 实现 Xml 元素与 {@link BeanDefinition} 解析
- *
- *
- *
- *    119 | Extensible XML authoring扩展原理
- *       {@link AbstractApplicationContext#obtainFreshBeanFactory()}
- *       -- {@link AbstractRefreshableApplicationContext#refreshBeanFactory()}
- *       -- -- {@link AbstractXmlApplicationContext#loadBeanDefinitions(org.springframework.beans.factory.support.DefaultListableBeanFactory)}
- *       -- -- -- {@link XmlBeanDefinitionReader#doLoadBeanDefinitions(org.xml.sax.InputSource, org.springframework.core.io.Resource)}
- *       -- -- -- -- {@link XmlBeanDefinitionReader#registerBeanDefinitions(org.w3c.dom.Document, org.springframework.core.io.Resource)}
- *       -- -- -- -- -- {@link DefaultBeanDefinitionDocumentReader#doRegisterBeanDefinitions(org.w3c.dom.Element)}
- *       -- -- -- -- -- -- {@link DefaultBeanDefinitionDocumentReader#parseBeanDefinitions(org.w3c.dom.Element, org.springframework.beans.factory.xml.BeanDefinitionParserDelegate)}
- *       -- -- -- -- -- -- -- {@link BeanDefinitionParserDelegate#parseCustomElement(org.w3c.dom.Element, org.springframework.beans.factory.config.BeanDefinition)}
- *       -- -- -- -- -- -- -- -- {@link BeanDefinitionParserDelegate#getNamespaceURI(org.w3c.dom.Node)} // 命名空间url
- *       -- -- -- -- -- -- -- -- {@link NamespaceHandlerResolver#resolve(java.lang.String)}
- *       -- -- -- -- -- -- -- -- -- {@link NamespaceHandler#init()}
- *       -- -- -- -- -- -- -- -- {@link NamespaceHandlerSupport#parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)}
- *       -- -- -- -- -- -- -- -- -- {@link AbstractBeanDefinitionParser#parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)}
- *       -- -- -- -- -- -- -- -- -- -- {@link AbstractSingleBeanDefinitionParser#parseInternal(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)}
- *       -- -- -- -- -- -- -- -- -- -- -- {@link AbstractSingleBeanDefinitionParser#doParse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext, org.springframework.beans.factory.support.BeanDefinitionBuilder)}
- *
- *
- *  {@link StringJoiner}
  * @author zhengshijun
  * @version created on 2020/11/15.
  */
@@ -57,6 +59,12 @@ public class ExtensibleXmlAuthoringSample {
 
 		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 		XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
-		beanDefinitionReader.loadBeanDefinitions("META-INF/users.xml");
+		int count = beanDefinitionReader.loadBeanDefinitions("META-INF/users.xml");
+		System.out.println("count="+count);
+		Map<String, UserEntity> map = beanFactory.getBeansOfType(UserEntity.class);
+		for (Map.Entry<String, UserEntity> entry : map.entrySet()) {
+			System.out.println(entry.getKey() + "=" + entry.getValue());
+		}
+
 	}
 }
