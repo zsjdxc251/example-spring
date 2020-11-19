@@ -1,4 +1,4 @@
-package org.example.spring.xml;
+package org.example.spring.ext;
 
 import org.example.spring.api.UserEntity;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

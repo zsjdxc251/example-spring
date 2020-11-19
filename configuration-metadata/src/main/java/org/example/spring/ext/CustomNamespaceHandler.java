@@ -1,4 +1,4 @@
-package org.example.spring.xml;
+package org.example.spring.ext;
 
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
