@@ -15,6 +15,7 @@
 		<module>bean-lifecycle</module>
 		<module>api</module>
 		<module>configuration-metadata</module>
+		<module>resource</module>
 	</modules>
 
 	<name>example-spring</name>
